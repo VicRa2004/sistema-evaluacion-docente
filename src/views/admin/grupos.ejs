@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title><%= title %></title>
+        <%- include('../partials/head') %>
+    </head>
+    <body>
+        <%- include('../partials/nav_admin') %>
+
+        <main class="container py-5">
+            <h1 class="text-center mb-4"><%= title %></h1>
+
+            <div class="d-flex align-items-center gap-3 mb-4">
+                <!-- Formulario combinado de búsqueda y filtro -->
+                <form
+                    method="post"
+                    action="/admin/grupos/busqueda_y_filtro"
+                    class="d-flex align-items-center gap-2 flex-grow-1"
+                >
+                    <input type="hidden" value="<%= page %>">
+                    <!-- Campo de búsqueda de grupo -->
+                    <label for="grupo_busqueda" class="visually-hidden">
+                        Buscar grupo
+                    </label>
+                    <input
+                        class="form-control w-75"
+                        type="text"
+                        name="grupo_busqueda"
+                        id="grupo_busqueda"
+                        placeholder="Escribe para buscar..."
+                        value="<%= busqueda %>"
+                    />
+            
+                    <!-- Filtro por ciclo escolar -->
+                    <label for="ciclo_id" class="visually-hidden">
+                        Ciclo Escolar
+                    </label>
+                    <select
+                        class="form-select w-25"
+                        name="ciclo_id"
+                        id="ciclo_id"
+                    >
+                        <option value="" selected>
+                            Todas
+                        </option>
+                        <% ciclos.forEach(ciclo => { %>
+                        <option <%= ciclo.ciclo_id == filtro ? "selected" : "" %> value="<%= ciclo.ciclo_id %>">
+                            <%= ciclo.ciclo_nombre %>
+                        </option>
+                        <% }) %>
+                    </select>
+            
+                    <!-- Botón de búsqueda y filtro -->
+                    <button
+                        type="submit"
+                        class="btn btn-secondary"
+                        aria-label="Buscar y filtrar"
+                    >
+                        <i class="bi bi-search"></i>
+                    </button>
+                </form>
+            </div>
+            
+            
+
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                <% grupos.forEach(grupo => { %>
+                <div class="col">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            <h5 class="card-title text-secondary">
+                                <%= grupo.grupo_nombre %>
+                            </h5>
+                            <h6 class="card-subtitle mb-2 text-muted">
+                                Ciclo: <%= grupo.ciclo_nombre %>
+                            </h6>
+                            <p class="card-text">
+                                <strong>Descripción:</strong> <%=
+                                grupo.grupo_descripcion %><br />
+                                <strong>Activo:</strong> <%= grupo.grupo_activo
+                                %>
+                            </p>
+                        </div>
+                        <div class="card-footer text-center">
+                            <a
+                                href="/admin/grupos/<%= grupo.grupo_id
+                                %>"
+                                class="btn btn-secondary btn-sm"
+                            >
+                                Ver detalles
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <% }); %>
+            </div>
+
+            <nav aria-label="Paginación">
+                <ul class="pagination justify-content-center mt-4">
+                    <% if (page > 1) { %>
+                    <li class="page-item">
+                        <a
+                            class="page-link"
+                            href="/admin/grupos?busqueda=<%= busqueda %>&filtro=<%= filtro %>&page=<%= page - 1 %>"
+                            >Anterior</a
+                        >
+                    </li>
+                    <% } %>
+                    <li class="page-item active">
+                        <span class="page-link"><%= page %></span>
+                    </li>
+                    <% if (grupos.length === 9) { %>
+                    <li class="page-item">
+                        <a
+                            class="page-link"
+                            href="/admin/grupos?busqueda=<%= busqueda %>&filtro=<%= filtro %>&page=<%= page + 1 %>"
+                            >Siguiente</a
+                        >
+                    </li>
+                    <% } %>
+                </ul>
+            </nav>
+        </main>
+
+        <%- include('../partials/footer') %>
+    </body>
+</html>

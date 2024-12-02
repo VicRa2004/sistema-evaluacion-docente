@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title><%= title %></title>
+        <%- include('../../../partials/head') %>
+    </head>
+    <body class="bg-light">
+        <%- include('../../../partials/nav_admin') %>
+
+        <main class="container p-5">
+            <h2 class="text-center text-secondary mb-5"><%= title %></h2>
+
+            <!-- Add Pregunta Button -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <p class="m-0"></p>
+                <a
+                    href="/admin/evaluaciones/preguntas/create"
+                    class="btn btn-secondary"
+                >
+                    <i class="bi bi-plus-circle"></i> Agregar criterio y
+                    preguntas
+                </a>
+            </div>
+
+            <!-- Error Alert -->
+            <% if (error) { %>
+            <div
+                class="alert alert-danger alert-dismissible fade show mb-4"
+                role="alert"
+            >
+                <strong>Error!</strong> <%= error.message %>
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"
+                ></button>
+            </div>
+            <% } %>
+
+            <h2 class="text-secondary mb-3">Criterios</h2>
+
+            <!-- Criterios Table -->
+            <div class="card shadow-sm border-0 rounded-4 mb-4">
+                <div class="card-body p-0">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-secondary text-center">
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Descripción</th>
+                                <th scope="col">Activo</th>
+                                <th scope="col" colspan="2">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% criterios.forEach(function(criterio) { %>
+                            <tr class="text-center align-middle">
+                                <td><%= criterio.criterio_id %></td>
+                                <td><%= criterio.criterio_nombre %></td>
+                                <td><%= criterio.criterio_descripcion %></td>
+                                <td>
+                                    <% if (criterio.criterio_activo == "SI") {
+                                    %>
+                                    <span class="badge bg-success">Activo</span>
+                                    <% } else { %>
+                                    <span class="badge bg-warning"
+                                        >Inactivo</span
+                                    >
+                                    <% } %>
+                                </td>
+                                <td>
+                                    <a
+                                        class="btn btn-outline-success btn-sm"
+                                        href="/admin/evaluaciones/preguntas/update/<%= criterio.criterio_id %>"
+                                    >
+                                        <i class="bi bi-pencil"></i> Editar
+                                        Criterio
+                                    </a>
+                                </td>
+                                <td>
+                                    <button
+                                        class="btn btn-outline-danger btn-sm"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#confirmDeleteModal"
+                                        data-criterio-id="<%= criterio.criterio_id %>"
+                                    >
+                                        <i class="bi bi-trash"></i> Eliminar
+                                        Criterio
+                                    </button>
+                                </td>
+                            </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <h2 class="text-secondary mb-3">Preguntas</h2>
+
+            <div class="card shadow-sm border-0 rounded-4 mb-5">
+                <div class="card-body p-0">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-secondary text-center">
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Pregunta</th>
+                                <th scope="col">Criterio</th>
+                                <th scope="col">Descripción del Criterio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% preguntas.forEach(function(pregunta) { %>
+                            <tr class="text-center align-middle">
+                                <td><%= pregunta.pregunta_id %></td>
+                                <td><%= pregunta.pregunta_texto %></td>
+                                <td><%= pregunta.criterio_nombre %></td>
+                                <td><%= pregunta.criterio_descripcion %></td>
+                            </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Paginación -->
+            <nav aria-label="Paginación">
+                <ul class="pagination justify-content-center mt-4">
+                    <% if (pagePreguntas > 1) { %>
+                    <li class="page-item">
+                        <a
+                            class="page-link"
+                            href="?page_pregunta=<%= pagePreguntas - 1 %>"
+                        >
+                            Anterior
+                        </a>
+                    </li>
+                    <% } %>
+                    <li class="page-item active">
+                        <span class="page-link"><%= pagePreguntas %></span>
+                    </li>
+                    <% if (preguntas.length === 10) { %>
+                    <!-- Ajusta este número según la paginación -->
+                    <li class="page-item">
+                        <a
+                            class="page-link"
+                            href="?page_pregunta=<%= pagePreguntas + 1 %>"
+                        >
+                            Siguiente
+                        </a>
+                    </li>
+                    <% } %>
+                </ul>
+            </nav>
+        </main>
+
+        <!-- Modal de confirmacion para eliminar -->
+        <div
+            class="modal fade"
+            id="confirmDeleteModal"
+            tabindex="-1"
+            aria-labelledby="confirmDeleteModalLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-secondary text-white">
+                        <h5 class="modal-title" id="confirmDeleteModalLabel">
+                            Confirmar eliminación
+                        </h5>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Estás seguro de que deseas eliminar este registro? Esta
+                        acción no se puede deshacer.
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                        >
+                            Cancelar
+                        </button>
+                        <a id="confirmDeleteButton" class="btn btn-danger">
+                            Eliminar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <%- include('../../../partials/footer') %>
+
+        <script>
+            // Configurar enlace de eliminación en el modal
+            document.addEventListener("DOMContentLoaded", () => {
+                const confirmDeleteModal =
+                    document.getElementById("confirmDeleteModal");
+
+                confirmDeleteModal.addEventListener(
+                    "show.bs.modal",
+                    ({ relatedTarget }) => {
+                        const id =
+                            relatedTarget.getAttribute("data-criterio-id") ||
+                            relatedTarget.getAttribute("data-pregunta-id");
+                        const path = relatedTarget.hasAttribute(
+                            "data-criterio-id"
+                        )
+                            ? `/admin/evaluaciones/criterios/delete/${id}`
+                            : `/admin/evaluaciones/preguntas/delete/${id}`;
+                        document.getElementById("confirmDeleteButton").href =
+                            path;
+                    }
+                );
+            });
+        </script>
+    </body>
+</html>

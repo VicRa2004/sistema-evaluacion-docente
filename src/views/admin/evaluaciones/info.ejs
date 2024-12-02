@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Evaluación - <%= evaluacion.evaluacion_descripcion %>
+    </title>
+    <%- include('../../partials/head') %>
+</head>
+
+<body class="bg-light">
+    <%- include('../../partials/nav_admin') %>
+
+        <main class="container py-5">
+            <!-- Información de la Evaluación -->
+            <section class="mb-5">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-secondary text-white">
+                        <h3 class="mb-0">Detalles de la Evaluación</h3>
+                    </div>
+                    <div class="card-body">
+
+                        <p>
+                            <strong>Descripción:</strong>
+                            <%= evaluacion.evaluacion_descripcion %>
+                        </p>
+                        <p>
+                            <strong>Grupo:</strong>
+                            <%= evaluacion.grupo_nombre %> - <%= evaluacion.grupo_descripcion %>
+                        </p>
+                        <p>
+                            <strong>Profesor Responsable:</strong>
+                            <%= evaluacion.usuario_nombres %>
+                                <%= evaluacion.usuario_apellido_paterno %>
+                                    <%= evaluacion.usuario_apellido_materno %>
+                        </p>
+                    </div>
+
+                    <div class="card-footer">
+                        <a class="btn btn-secondary"
+                            href="/admin/evaluaciones/resultados/<%= evaluacion.evaluacion_id %>">
+                            Ver resultados
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Información del Profesor -->
+            <section class="mb-5">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-secondary text-white">
+                        <h3 class="mb-0">Información del Profesor</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>
+                            <strong>Nombre:</strong>
+                            <%= profesor.nombre %>
+                                <%= profesor.apellidos %>
+                        </p>
+                        <p><strong>Clave:</strong>
+                            <%= profesor.clave %>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lista de Estudiantes -->
+            <section>
+                <div class="card shadow-sm">
+                    <div class="card-header bg-secondary text-white">
+                        <h3 class="mb-0">Lista de Estudiantes</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-hover">
+                            <thead class="table-primary">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Clave</th>
+                                    <th>Nombre Completo</th>
+                                    <th>Rol</th>
+                                    <th>Grupo</th>
+                                    <th>Descripción del Grupo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% estudiantes.forEach(estudiante=> { %>
+                                    <tr>
+                                        <td>
+                                            <%= estudiante.usuario_id %>
+                                        </td>
+                                        <td>
+                                            <%= estudiante.usuario_clave %>
+                                        </td>
+                                        <td>
+                                            <%= estudiante.usuario_nombres %>
+                                                <%= estudiante.usuario_apellido_paterno %>
+                                                    <%= estudiante.usuario_apellido_materno %>
+                                        </td>
+                                        <td>
+                                            <%= estudiante.rol_nombre %>
+                                        </td>
+                                        <td>
+                                            <%= estudiante.grupo_nombre %>
+                                        </td>
+                                        <td>
+                                            <%= estudiante.grupo_descripcion %>
+                                        </td>
+                                    </tr>
+                                    <% }); %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <%- include('../../partials/footer') %>
+</body>
+
+</html>

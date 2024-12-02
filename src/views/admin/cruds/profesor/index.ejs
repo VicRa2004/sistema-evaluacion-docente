@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title><%= title %></title>
+        <%- include('../../../partials/head') %>
+    </head>
+    <body class="bg-light">
+        <%- include('../../../partials/nav_admin') %>
+
+        <main class="container p-5">
+            <h2 class="text-center text-secondary mb-5"><%= title %></h2>
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div class="search-box">
+                    <form
+                        method="post"
+                        action="/admin/profesor/"
+                        class="d-flex align-items-center gap-2"
+                    >
+                        <label for="estudiante_busqueda" class="visually-hidden"
+                            >Buscar estudiante</label
+                        >
+                        <input
+                            class="form-control"
+                            type="text"
+                            name="estudiante_busqueda"
+                            id="estudiante_busqueda"
+                            placeholder="Escribe para buscar..."
+                        />
+                        <button
+                            type="submit"
+                            class="btn btn-secondary"
+                            aria-label="Buscar"
+                        >
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </form>
+                </div>
+                <a href="/admin/profesor/create" class="btn btn-secondary">
+                    <i class="bi bi-plus-circle"></i> Agregar Profesor
+                </a>
+            </div>
+
+            <!-- Tabla de Profesores -->
+            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-body p-0">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-secondary text-center">
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Clave</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Apellido Paterno</th>
+                                <th scope="col">Apellido Materno</th>
+                                <th scope="col">Fecha de Nacimiento</th>
+                                <th scope="col">Genero</th>
+                                <th scope="col">Academia</th>
+                                <th scope="col">Departamento</th>
+                                <th scope="col">Activo</th>
+                                <th scope="col">Fecha de Alta</th>
+                                <th scope="col">Fecha de Baja</th>
+                                <th scope="col" colspan="2">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% profesores.forEach(profesor => { %>
+                            <tr class="text-center align-middle">
+                                <td><%= profesor.profesor_id %></td>
+                                <td><%= profesor.profesor_clave %></td>
+                                <td><%= profesor.profesor_nombres %></td>
+                                <td>
+                                    <%= profesor.profesor_apellido_paterno %>
+                                </td>
+                                <td>
+                                    <%= profesor.profesor_apellido_materno %>
+                                </td>
+                                <td>
+                                    <%= profesor.profesor_fecha_nacimiento %>
+                                </td>
+                                <td><%= profesor.profesor_genero %></td>
+                                <td><%= profesor.academia_nombre %></td>
+                                <td><%= profesor.departamento_nombre %></td>
+                                <td>
+                                    <% if (profesor.profesor_activo == "SI") {
+                                    %>
+                                    <span class="badge bg-success">Activo</span>
+                                    <% } else { %>
+                                    <span class="badge bg-warning">
+                                        Inactivo
+                                    </span>
+                                    <% } %>
+                                </td>
+                                <td><%= profesor.profesor_fecha_alta %></td>
+                                <td>
+                                    <%= profesor.profesor_fecha_baja ?
+                                    profesor.profesor_fecha_baja : "Activo" %>
+                                </td>
+                                <td>
+                                    <a
+                                        class="btn btn-outline-success btn-sm"
+                                        href="/admin/profesor/update/<%= profesor.profesor_id %>"
+                                    >
+                                        <i class="bi bi-pencil"></i> Actualizar
+                                    </a>
+                                </td>
+                                <td>
+                                    <button
+                                        class="btn btn-outline-danger btn-sm"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#confirmDeleteModal"
+                                        data-profesor-id="<%= profesor.profesor_id %>"
+                                    >
+                                        <i class="bi bi-trash"></i> Eliminar
+                                    </button>
+                                </td>
+                            </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+
+        <!-- Paginación -->
+        <nav aria-label="Paginación">
+            <ul class="pagination justify-content-center mt-4">
+                <% if (currentPage > 1) { %>
+                <li class="page-item">
+                    <a
+                        class="page-link"
+                        href="?page=<%= currentPage - 1 %>&busqueda=<%= query %>"
+                        >Anterior</a
+                    >
+                </li>
+                <% } %>
+                <li class="page-item active">
+                    <span class="page-link"><%= currentPage %></span>
+                </li>
+                <% if (profesores.length === 10) { %>
+                <li class="page-item">
+                    <a
+                        class="page-link"
+                        href="?page=<%= currentPage + 1 %>&busqueda=<%= query %>"
+                        >Siguiente</a
+                    >
+                </li>
+                <% } %>
+            </ul>
+        </nav>
+
+        <!-- Modal de confirmacion para eliminar -->
+        <div
+            class="modal fade"
+            id="confirmDeleteModal"
+            tabindex="-1"
+            aria-labelledby="confirmDeleteModalLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-secondary text-white">
+                        <h5 class="modal-title" id="confirmDeleteModalLabel">
+                            Confirmar eliminación
+                        </h5>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Estás seguro de que deseas eliminar este profesor? Esta
+                        acción no se puede deshacer.
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                        >
+                            Cancelar
+                        </button>
+                        <a id="confirmDeleteButton" class="btn btn-danger"
+                            >Eliminar</a
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // Configurar enlace de eliminación en el modal
+            document.addEventListener("DOMContentLoaded", () => {
+                const confirmDeleteModal =
+                    document.getElementById("confirmDeleteModal");
+
+                confirmDeleteModal.addEventListener(
+                    "show.bs.modal",
+                    ({ relatedTarget }) => {
+                        const profesorId =
+                            relatedTarget.getAttribute("data-profesor-id");
+                        document.getElementById(
+                            "confirmDeleteButton"
+                        ).href = `/admin/profesor/delete/${profesorId}`;
+                    }
+                );
+            });
+        </script>
+
+        <%- include('../../../partials/footer') %>
+    </body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Detalles del Grupo</title>
+        <%- include('../../partials/head') %>
+    </head>
+
+    <body>
+        <%- include('../../partials/nav_admin') %>
+
+        <main class="container py-5">
+            <h1 class="text-center mb-4">Detalles del Grupo</h1>
+
+            <!-- Información del Profesor -->
+            <% if (profesor != null) { %>
+            <section class="mb-5">
+                <h2 class="h4 text-muted">Profesor</h2>
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">
+                            <%= profesor.nombre %> <%= profesor.apellidos %>
+                        </h5>
+                        <p class="card-text">
+                            <strong>Clave:</strong> <%= profesor.clave %>
+                        </p>
+                        <% if (!evaluacion) { %>
+                        <a
+                            class="btn btn-outline-danger"
+                            href="/admin/set_grupos/delete_profesor/?usuario_grupo_id=<%= profesor.grupo_id %>&id_grupo=<%= grupo_id %>"
+                            >Eliminar</a
+                        >
+                        <% } %>
+                    </div>
+                </div>
+            </section>
+            <% } else { %>
+            <section class="mb-5">
+                <a
+                    class="btn btn-outline-secondary"
+                    href="/admin/grupos/profesor/<%= grupo_id %>"
+                    >Añadir profesor</a
+                >
+            </section>
+
+            <% } %>
+
+            <!-- Lista de Estudiantes -->
+            <section class="mb-4">
+                <h2 class="h4 text-muted">Estudiantes</h2>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead class="table-light">
+                            <tr class="text-center">
+                                <th>#</th>
+                                <th>Clave</th>
+                                <th>Nombre</th>
+                                <th>Apellidos</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% estudiantes.forEach((estudiante, index) => { %>
+                            <tr class="text-center">
+                                <td><%= estudiante.usuario_grupo_id %></td>
+                                <td><%= estudiante.usuario_clave %></td>
+                                <td><%= estudiante.usuario_nombres %></td>
+                                <td>
+                                    <%= estudiante.usuario_apellido_paterno %>
+                                    <%= estudiante.usuario_apellido_materno %>
+                                </td>
+                                <td>
+                                    <% if (!evaluacion) { %>
+                                    <a
+                                        class="btn btn-outline-danger"
+                                        href="/admin/set_grupos/delete_estudiante?usuario_grupo_id=<%= estudiante.usuario_grupo_id %>&id_grupo=<%= grupo_id %>"
+                                        >Eliminar</a
+                                    >
+                                    <% } else { %>
+                                    <p class="text-warning">
+                                        <i class="bi bi-exclamation-circle"></i>
+                                        Hay una evaluacion pendiente
+                                    </p>
+                                    <% } %>
+                                </td>
+                            </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section>
+                <% if (!evaluacion) { %>
+                <a
+                    class="btn btn-outline-secondary"
+                    href="/admin/grupos/estudiante/<%= grupo_id %>"
+                    >Añadir estudiantes</a
+                >
+                <% } %>
+            </section>
+        </main>
+
+        <%- include('../../partials/footer') %>
+    </body>
+</html>

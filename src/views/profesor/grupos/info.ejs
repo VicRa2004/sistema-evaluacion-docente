@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Estudiantes del Grupo</title>
+    <%- include('../../partials/head') %>
+</head>
+
+<body>
+    <%- include('../../partials/nav_profesor') %>
+
+        <main class="container py-5">
+            <h1 class="text-center mb-4">Estudiantes del Grupo</h1>
+
+            <!-- Lista de Estudiantes -->
+            <section class="mb-5">
+                <h2 class="h4 text-info">Lista de Estudiantes</h2>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="table-info">
+                            <tr>
+                                <th>#</th>
+                                <th>Clave</th>
+                                <th>Nombre Completo</th>
+                                <th>Rol</th>
+                                <th>Descripción del Grupo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% estudiantes.forEach((estudiante, index)=> { %>
+                                <tr>
+                                    <td>
+                                        <%= index + 1 %>
+                                    </td>
+                                    <td>
+                                        <%= estudiante.usuario_clave %>
+                                    </td>
+                                    <td>
+                                        <%= estudiante.usuario_nombres %>
+                                            <%= estudiante.usuario_apellido_paterno %>
+                                                <%= estudiante.usuario_apellido_materno %>
+                                    </td>
+                                    <td>
+                                        <%= estudiante.rol_nombre %>
+                                    </td>
+                                    <td>
+                                        <%= estudiante.grupo_descripcion %>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Mensaje si no hay estudiantes -->
+                <% if (estudiantes.length===0) { %>
+                    <div class="alert alert-warning text-center mt-4">
+                        No hay estudiantes asignados a este grupo.
+                    </div>
+                    <% } %>
+            </section>
+        </main>
+
+        <%- include('../../partials/footer') %>
+</body>
+
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Evaluación Docente</title>
+    <%- include('../../partials/head') %>
+</head>
+
+<body>
+    <%- include('../../partials/nav_estudiante') %>
+
+        <main class="container my-5">
+            <h1 class="text-center mb-4">Formulario de Evaluación Docente</h1>
+
+            <form action="/estudiante/evaluaciones" method="POST">
+                <input type="hidden" name="evaluacion_id" value="<%= evaluacion_id %>" />
+                <input type="hidden" name="evaluacion_pediente_id" value="<%= evaluacion_pediente_id %>" />
+                <% criterioPreguntas.forEach((criterio)=> { %>
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">
+                                <%= criterio.criterio_nombre %>
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="text-muted">
+                                <%= criterio.criterio_descripcion %>
+                            </p>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th style="width: 60%">Pregunta</th>
+                                            <th class="text-center">
+                                                Muy de acuerdo
+                                            </th>
+                                            <th class="text-center">De acuerdo</th>
+                                            <th class="text-center">Neutral</th>
+                                            <th class="text-center">
+                                                En desacuerdo
+                                            </th>
+                                            <th class="text-center">
+                                                Muy en desacuerdo
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% criterio.preguntas.forEach((pregunta)=>
+                                            { %>
+                                            <tr>
+                                                <td>
+                                                    <%= pregunta.pregunta_texto %>
+                                                </td>
+                                                <% const
+                                                    uniqueName=`respuesta_${criterio.criterio_id}_${pregunta.pregunta_id}`;
+                                                    %>
+                                                    <td class="text-center">
+                                                        <input type="radio" name="<%= uniqueName %>"
+                                                            id="<%= uniqueName %>_muydeacuerdo" value="Muy de acuerdo"
+                                                            required />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <input type="radio" name="<%= uniqueName %>"
+                                                            id="<%= uniqueName %>_deacuerdo" value="De acuerdo" />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <input type="radio" name="<%= uniqueName %>"
+                                                            id="<%= uniqueName %>_neutral" value="Neutral" />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <input type="radio" name="<%= uniqueName %>"
+                                                            id="<%= uniqueName %>_endesacuerdo" value="En desacuerdo" />
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <input type="radio" name="<%= uniqueName %>"
+                                                            id="<%= uniqueName %>_muyendesacuerdo"
+                                                            value="Muy en desacuerdo" />
+                                                    </td>
+                                            </tr>
+                                            <% }) %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <% }) %>
+
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                Enviar Evaluación
+                            </button>
+                        </div>
+            </form>
+        </main>
+
+        <%- include('../../partials/footer') %>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title><%= title %></title>
+        <%- include('partials/head') %>
+    </head>
+    <body>
+        <%- include('partials/navigation') %>
+        <main class="p-4 container">
+            <h1><%= title %></h1>
+            <p>Nosotros somos ...</p>
+
+            <h2>Nuestros integrantes</h2>
+            <ul class="list-group list-group-numbered">
+                <li class="list-group-item">Eduardo Rivera Cruz</li>
+                <li class="list-group-item">Gerardo Segura Navarro</li>
+                <li class="list-group-item">
+                    Jose Fransisco Quevedo Hernández
+                </li>
+                <li class="list-group-item">Victor Raúl García García</li>
+                <li class="list-group-item">
+                    Jazmin del Carmen Dominguez de la Cruz
+                </li>
+            </ul>
+        </main>
+
+        <%- include('partials/footer') %>
+    </body>
+</html>

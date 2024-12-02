@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Detalles del Grupo</title>
+        <%- include('../../partials/head') %>
+    </head>
+    <body>
+        <%- include('../../partials/nav_admin') %>
+
+        <main class="container py-5">
+            <h1 class="text-center mb-4">Agregar estudiantes al grupo</h1>
+
+            <% if (error) { %>
+            <div
+                class="alert alert-danger alert-dismissible fade show mb-4"
+                role="alert"
+            >
+                <strong>Error!</strong> <%= error.message %>
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"
+                ></button>
+            </div>
+            <% } %>
+
+            <!-- Lista de Estudiantes -->
+            <section>
+                <div class="mb-3">
+                    <a
+                        class="btn btn-outline-secondary"
+                        href="http://localhost:3000/admin/grupos/<%= grupo_id %>"
+                        >Regresar</a
+                    >
+                </div>
+                <h2 class="h4 text-muted mb-4">Estudiantes</h2>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead class="table-light">
+                            <tr class="text-center">
+                                <th>#</th>
+                                <th>Clave</th>
+                                <th>Nombre</th>
+                                <th>Apellidos</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% estudiantes.forEach((estudiante, index) => { %>
+                            <% if (!estudiante.existsGroup) { %>
+                            <tr class="text-center">
+                                <td><%= index + 1 %></td>
+                                <td><%= estudiante.estudiante_clave %></td>
+                                <td><%= estudiante.estudiante_nombres %></td>
+                                <td>
+                                    <%= estudiante.estudiante_apellido_paterno
+                                    %> <%=
+                                    estudiante.estudiante_apellido_materno %>
+                                </td>
+                                <td>
+                                    <a
+                                        class="btn btn-outline-success"
+                                        href="/admin/set_grupos/add_estudiante/?id_usuario=<%= estudiante.estudiante_id %>&id_grupo=<%= grupo_id %>"
+                                        >Agregar</a
+                                    >
+                                </td>
+                            </tr>
+                            <% } %> <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+
+        <%- include('../../partials/footer') %>
+    </body>
+</html>

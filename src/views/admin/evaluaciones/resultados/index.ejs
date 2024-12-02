@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+        <%= title %>
+    </title>
+    <%- include('../../../partials/head') %>
+</head>
+
+<body class="bg-light">
+    <%- include('../../../partials/nav_admin') %>
+
+        <main class="container p-5">
+            <h1 class="mb-4 text-secondary">Resultados por Criterio</h1>
+
+            <% if (resultadosPorCriterio && resultadosPorCriterio.length> 0) {
+                %> <% resultadosPorCriterio.forEach((resultado, index)=> { %>
+                    <section class="mb-5">
+                        <div class="card border-secondary">
+                            <div class="card-header bg-secondary text-white">
+                                <h2 class="h5 mb-0">
+                                    Criterio <%= index + 1 %>: <%= resultado.criterio_nombre %>
+                                </h2>
+                            </div>
+                            <div class="card-body">
+                                <p>
+                                    <strong>Puntaje Promedio General:</strong>
+                                    <span class="badge bg-secondary">
+                                        <%= resultado.puntaje_promedio_general ? resultado.puntaje_promedio_general
+                                            : "Aun no hay resultados" %>
+                                    </span>
+                                </p>
+
+                                <h3 class="mt-4 h6 text-secondary">Estudiantes</h3>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped">
+                                        <thead class="table-secondary">
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Clave</th>
+                                                <th>Nombre Completo</th>
+                                                <th>Puntaje</th>
+                                                <th>Estatus</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% resultado.estudiantes.forEach((estudiante, estudianteIndex)=> { %>
+                                                <tr>
+                                                    <td>
+                                                        <%= estudianteIndex + 1 %>
+                                                    </td>
+                                                    <td>
+                                                        <%= estudiante.usuario_clave %>
+                                                    </td>
+                                                    <td>
+                                                        <%= estudiante.usuario_nombres || '' %>
+                                                            <%= estudiante.usuario_apellido_paterno %>
+                                                                <%= estudiante.usuario_apellido_materno %>
+                                                    </td>
+                                                    <td>
+                                                        <%= estudiante.puntaje_promedio || 'N/A' %>
+                                                    </td>
+                                                    <td>
+                                                        <span
+                                                            class="badge <%= estudiante.puntaje_promedio ? 'bg-success' : 'bg-warning' %>">
+                                                            <%= estudiante.puntaje_promedio ? 'Evaluado' : 'Pendiente'
+                                                                %>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <% }); %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <% }); %>
+                        <% } else { %>
+                            <div class="alert alert-warning">
+                                No hay criterios con resultados disponibles.
+                            </div>
+                            <% } %>
+        </main>
+
+        <%- include('../../../partials/footer') %>
+</body>
+
+</html>

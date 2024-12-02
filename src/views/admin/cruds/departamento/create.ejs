@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title><%= title %></title>
+        <%- include('../../../partials/head') %>
+    </head>
+    <body class="bg-light">
+        <%- include('../../../partials/nav_admin') %>
+
+        <main class="container p-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-10 col-12">
+                    <div class="card border-0 shadow-lg rounded-4">
+                        <div class="card-body p-5">
+                            <h2 class="text-center text-secondary mb-4">
+                                Crear Departamento
+                            </h2>
+
+                            <!-- Mensaje de error -->
+                            <% if (error) { %>
+                            <div
+                                class="alert alert-danger alert-dismissible fade show mb-4"
+                                role="alert"
+                            >
+                                <strong>Error!</strong> <%= error.message %>
+                                <button
+                                    type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="alert"
+                                    aria-label="Close"
+                                ></button>
+                            </div>
+                            <% } %>
+
+                            <!-- Formulario de creación -->
+                            <form method="post" action="/admin/departamento/create" class="needs-validation" novalidate>
+                                
+                                <!-- Nombre del Departamento -->
+                                <div class="mb-4">
+                                    <label for="depa_nombre" class="form-label">Nombre del Departamento</label>
+                                    <input
+                                        name="depa_nombre"
+                                        id="depa_nombre"
+                                        type="text"
+                                        class="form-control border-secondary shadow-sm"
+                                        placeholder="Ej. Ciencias Sociales"
+                                        required
+                                    />
+                                    <div class="invalid-feedback">
+                                        Por favor, ingresa el nombre del departamento.
+                                    </div>
+                                </div>
+
+                                <!-- Descripción del Departamento -->
+                                <div class="mb-4">
+                                    <label for="depa_descripcion" class="form-label">Descripción</label>
+                                    <input
+                                        name="depa_descripcion"
+                                        id="depa_descripcion"
+                                        type="text"
+                                        class="form-control border-secondary shadow-sm"
+                                        placeholder="Breve descripción del departamento"
+                                        required
+                                    />
+                                    <div class="invalid-feedback">
+                                        Por favor, ingresa una descripción.
+                                    </div>
+                                </div>
+
+                                <!-- Selección de Academia -->
+                                <div class="mb-4">
+                                    <label for="depa_aca_id" class="form-label">Academia</label>
+                                    <select
+                                        class="form-select border-secondary shadow-sm"
+                                        name="depa_aca_id"
+                                        id="depa_aca_id"
+                                        required
+                                    >
+                                        <option value="" disabled selected>Selecciona una academia</option>
+                                        <% academias.forEach(academia => { %>
+                                        <option value="<%= academia.academia_id %>">
+                                            <%= academia.academia_nombre %>
+                                        </option>
+                                        <% }) %>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Por favor, selecciona una academia.
+                                    </div>
+                                </div>
+
+                                <!-- Fecha de creación -->
+                                <div class="mb-4">
+                                    <label for="depa_fecha" class="form-label">Fecha de Creación</label>
+                                    <input
+                                        name="depa_fecha"
+                                        id="depa_fecha"
+                                        type="date"
+                                        class="form-control border-secondary shadow-sm"
+                                        required
+                                    />
+                                    <div class="invalid-feedback">
+                                        Por favor, selecciona una fecha de creación.
+                                    </div>
+                                </div>
+
+                                <!-- Botón de Envío -->
+                                <div class="d-grid">
+                                    <button
+                                        type="submit"
+                                        class="btn btn-primary shadow-sm"
+                                    >
+                                        Agregar Departamento
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <%- include('../../../partials/footer') %>
+
+        <script>
+            // Habilitar validación de Bootstrap
+            (() => {
+                'use strict';
+                const forms = document.querySelectorAll('.needs-validation');
+                Array.from(forms).forEach((form) => {
+                    form.addEventListener(
+                        'submit',
+                        (event) => {
+                            if (!form.checkValidity()) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                            }
+                            form.classList.add('was-validated');
+                        },
+                        false
+                    );
+                });
+            })();
+        </script>
+    </body>
+</html>

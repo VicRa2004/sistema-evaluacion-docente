@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title><%= title %></title>
+        <%- include('../partials/head') %>
+    </head>
+    <body class="bg-light">
+        <%- include('../partials/nav_estudiante') %>
+
+        <main class="container p-5 d-flex justify-content-center">
+            <div
+                class="card border-0 shadow-lg rounded-4"
+                style="max-width: 600px"
+            >
+                <div
+                    class="card-header text-center bg-primary text-white rounded-top-4 py-4"
+                >
+                    <h2 class="mb-0">
+                        <i class="bi bi-person-circle"></i> Perfil Estudiante
+                    </h2>
+                </div>
+                <div class="card-body p-4">
+                    <div class="mb-4">
+                        <span class="h5 fw-semibold">Nombre del perfil:</span>
+                        <span class="h5 fw-normal text-muted">
+                            <%= `${estudiante.usuario_nombres}
+                            ${estudiante.usuario_apellido_paterno}
+                            ${estudiante.usuario_apellido_materno}` %>
+                        </span>
+                    </div>
+                    <div class="mb-4">
+                        <span class="h5 fw-semibold">Clave:</span>
+                        <span class="h5 fw-normal text-muted">
+                            <%= estudiante.usuario_clave %>
+                        </span>
+                    </div>
+                    <div class="mb-4">
+                        <span class="h5 fw-semibold">ID:</span>
+                        <span class="h5 fw-normal text-muted">
+                            <%= estudiante.usuario_id %>
+                        </span>
+                    </div>
+
+                    <div class="mb-4">
+                        <span class="h5 fw-semibold">Genero:</span>
+                        <span class="h5 fw-normal text-muted">
+                            <%= estudiante.usuario_genero %>
+                        </span>
+                    </div>
+
+                    <div class="mb-4">
+                        <span class="h5 fw-semibold">Fecha Alta:</span>
+                        <span class="h5 fw-normal text-muted">
+                            <%= estudiante.usuario_fecha_alta %>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <%- include('../partials/footer') %>
+    </body>
+</html>

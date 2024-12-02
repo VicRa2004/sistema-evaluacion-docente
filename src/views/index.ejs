@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title><%= title %></title>
+        <%- include('./partials/head') %>
+    </head>
+    <body class="bg-light">
+        <!-- Navbar -->
+        <%- include('./partials/navigation') %>
+
+        <!-- Hero Section -->
+        <header class="bg-primary text-white text-center py-5">
+            <div class="container">
+                <h1 class="display-4">Sistema de Evaluación Docente</h1>
+                <p class="lead">
+                    Mejora continua a través de la retroalimentación
+                </p>
+                <!-- <a
+                    href="/estudiante/register"
+                    class="btn btn-outline-light btn-lg mt-3"
+                    >Regístrate</a
+                >
+                 -->
+                <a href="/login" class="btn btn-light btn-lg mt-3"
+                    >Iniciar sesión</a
+                >
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="container my-5">
+            <!-- About Section -->
+            <section class="text-center mb-5">
+                <h2 class="text-primary">Acerca del Sistema</h2>
+                <p class="lead">
+                    Nuestro sistema permite la evaluación de los docentes
+                    mediante cuestionarios personalizados, ayudando a fomentar
+                    una educación de calidad y a reconocer el esfuerzo de
+                    nuestros profesores.
+                </p>
+            </section>
+
+            <!-- Features Section -->
+            <section class="row text-center mb-5">
+                <div class="col-md-4">
+                    <div class="card border-primary shadow-sm">
+                        <div class="card-body">
+                            <i class="bi bi-person-check fs-1 text-primary"></i>
+                            <h3 class="card-title mt-3">
+                                Evaluación de Profesores
+                            </h3>
+                            <p class="card-text">
+                                Accede a herramientas avanzadas para realizar
+                                evaluaciones justas y objetivas.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card border-primary shadow-sm">
+                        <div class="card-body">
+                            <i
+                                class="bi bi-bar-chart-line fs-1 text-primary"
+                            ></i>
+                            <h3 class="card-title mt-3">
+                                Análisis de Resultados
+                            </h3>
+                            <p class="card-text">
+                                Visualiza reportes detallados que facilitan la
+                                toma de decisiones para la mejora continua.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card border-primary shadow-sm">
+                        <div class="card-body">
+                            <i class="bi bi-chat-dots fs-1 text-primary"></i>
+                            <h3 class="card-title mt-3">
+                                Retroalimentación Constructiva
+                            </h3>
+                            <p class="card-text">
+                                Recibe comentarios útiles que impulsan el
+                                crecimiento y la innovación en la docencia.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <%- include('./partials/footer') %>
+    </body>
+</html>

@@ -1,0 +1,68 @@
+<nav class="navbar navbar-expand-lg bg-secondary">
+    <div class="container-fluid">
+        <!-- Logo y nombre de la app -->
+        <a class="navbar-brand text-white fw-bold" href="/admin/">
+            <i class="bi bi-mortarboard-fill"></i> App Evaluacion
+        </a>
+
+        <!-- Botón de colapsado en dispositivos móviles -->
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Enlaces de navegación y opciones de cuenta -->
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link text-white" href="/admin/">
+                    <i class="bi bi-house-door"></i> Inicio
+                </a>
+
+                <a class="nav-link text-white" href="/admin/grupos">
+                    <i class="bi bi-collection"></i> Grupos
+                </a>
+
+                <a class="nav-link text-white" href="/admin/evaluaciones">
+                    <i class="bi bi-clipboard"></i> Evaluaciones
+                </a>
+
+                <!-- Menú desplegable de Cuenta -->
+                <div class="nav-item dropdown border border-2 rounded-3 ms-3">
+                    <button
+                        class="btn btn-secondary dropdown-toggle text-white"
+                        type="button"
+                        id="accountDropdown"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                    >
+                        <i class="bi bi-person-circle"></i> Cuenta
+                    </button>
+                    <ul
+                        class="dropdown-menu dropdown-menu-end shadow-lg"
+                        aria-labelledby="accountDropdown"
+                    >
+                        <li>
+                            <a class="dropdown-item" href="/admin/perfil"
+                                ><i class="bi bi-person-circle"></i> Perfil</a
+                            >
+                        </li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li>
+                            <a class="dropdown-item" href="/admin/logout"
+                                ><i class="bi bi-box-arrow-left"></i> Cerrar
+                                sesión</a
+                            >
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

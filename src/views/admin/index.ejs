@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+        <%= title %>
+    </title>
+    <%- include('../partials/head') %>
+</head>
+
+<body class="bg-light">
+    <%- include('../partials/nav_admin') %>
+    <main class="container p-5">
+        <h1 class="text-center text-secondary mb-5">
+            <%= title %>
+        </h1>
+
+        <!-- Card for Academia -->
+        <div class="card border-0 shadow-sm rounded-4 mb-4">
+            <div class="card-header bg-secondary text-white fw-bold">
+                <i class="bi bi-table"></i> Tabla - Academia
+            </div>
+            <div class="card-body">
+                <h5 class="card-title text-secondary">Academia</h5>
+                <p class="card-text text-muted">
+                    Por Academia se entenderá la unidad departamental que
+                    agrupa un conjunto de profesores que guardan afinidad
+                    con respecto a sus funciones de investigación, docencia
+                    y servicio.
+                </p>
+                <a href="/admin/academia/" class="btn btn-outline-secondary">
+                    Ver más <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Card for Departamento Academico -->
+        <div class="card border-0 shadow-sm rounded-4 mb-4">
+            <div class="card-header bg-secondary text-white fw-bold">
+                <i class="bi bi-table"></i> Tabla - Departamento Académico
+            </div>
+            <div class="card-body">
+                <h5 class="card-title text-secondary">
+                    Departamento Académico
+                </h5>
+                <p class="card-text text-muted">
+                    Un departamento académico es una unidad académica que
+                    agrupa a docentes de una misma disciplina o afines para
+                    realizar actividades como la investigación, la
+                    enseñanza, la vinculación con la sociedad y la
+                    prestación de servicios.
+                </p>
+                <a href="/admin/departamento/"
+                    class="btn btn-outline-secondary">
+                    Ver más <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Card for Carreras -->
+        <div class="card border-0 shadow-sm rounded-4 mb-4">
+            <div class="card-header bg-secondary text-white fw-bold">
+                <i class="bi bi-table"></i> Tabla - Carreras
+            </div>
+            <div class="card-body">
+                <h5 class="card-title text-secondary">Carreras</h5>
+                <p class="card-text text-muted">
+                    Una carrera en una escuela es un conjunto de estudios
+                    que permiten adquirir habilidades y conocimientos
+                    profesionales para ejercer una profesión.
+                </p>
+                <a href="/admin/carrera/" class="btn btn-outline-secondary">
+                    Ver más <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+        <% if (carrera.length > 0) { %>
+        <!-- Card for Estudiantes -->
+        <div class="card border-0 shadow-sm rounded-4 mb-4">
+            <div class="card-header bg-secondary text-white fw-bold">
+                <i class="bi bi-table"></i> Tabla - Estudiante
+            </div>
+            <div class="card-body">
+                <h5 class="card-title text-secondary">Estudiantes</h5>
+                <p class="card-text text-muted">
+                    La palabra estudiante es un sustantivo masculino o
+                    femenino que se refiere al aprendiz dentro del ámbito
+                    académico y que se dedica a esta actividad como su
+                    ocupación principal.
+                </p>
+                <a href="/admin/estudiante/" class="btn btn-outline-secondary">
+                    Ver más <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+        <% } else { %>
+        <div class="alert alert-warning" role="alert">
+            <h4 class="alert-heading"><i class="bi bi-exclamation-triangle"></i>
+                Tabla no disponible!
+            </h4>
+            <p>
+                Necesitas Rellenar la tabla Carreras para que puedas agregar a
+                los estudiantes.
+            </p>
+            <hr>
+            <p class="mb-0">
+                Rellena las tablas faltantes.
+            </p>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        <% } %>
+        <% if (academia.length > 0 && departamento.length > 0) { %>
+        <!-- Card for Profesores -->
+        <div class="card border-0 shadow-sm rounded-4 mb-4">
+            <div class="card-header bg-secondary text-white fw-bold">
+                <i class="bi bi-table"></i> Tabla - Profesor
+            </div>
+            <div class="card-body">
+                <h5 class="card-title text-secondary">Profesores</h5>
+                <p class="card-text text-muted">
+                    La palabra estudiante es un sustantivo masculino o
+                    femenino que se refiere al aprendiz dentro del ámbito
+                    académico y que se dedica a esta actividad como su
+                    ocupación principal.
+                </p>
+                <a href="/admin/profesor/" class="btn btn-outline-secondary">
+                    Ver más <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+        <% } else { %>
+        <div class="alert alert-warning" role="alert">
+            <h4 class="alert-heading"><i class="bi bi-exclamation-triangle"></i>
+                Tabla no disponible!
+            </h4>
+            <p>
+                Necesitas Rellenar las tablas Academias y departamentos para que
+                puedas agregar
+                a los profesores.
+            </p>
+            <hr>
+            <p class="mb-0">
+                Rellena las tablas faltantes.
+            </p>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        <% } %><!-- Card for CiloEscolar -->
+        <div class="card border-0 shadow-sm rounded-4 mb-4">
+            <div class="card-header bg-secondary text-white fw-bold">
+                <i class="bi bi-table"></i> Tabla - Ciclo Escolar
+            </div>
+            <div class="card-body">
+                <h5 class="card-title text-secondary">Ciclos Escolares</h5>
+                <p class="card-text text-muted">
+                    La palabra estudiante es un sustantivo masculino o
+                    femenino que se refiere al aprendiz dentro del ámbito
+                    académico y que se dedica a esta actividad como su
+                    ocupación principal.
+                </p>
+                <a href="/admin/ciclo/" class="btn btn-outline-secondary">
+                    Ver más <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+        <% if (ciclo.length > 0) { %><!-- Card for Grupo -->
+        <div class="card border-0 shadow-sm rounded-4 mb-4">
+            <div class="card-header bg-secondary text-white fw-bold">Tabla -
+                Grupo</div>
+            <div class="card-body">
+                <h5 class="card-title text-secondary">Grupos</h5>
+                <p class="card-text text-muted">
+                    La palabra estudiante es un sustantivo masculino o
+                    femenino que se refiere al aprendiz dentro del ámbito
+                    académico y que se dedica a esta actividad como su
+                    ocupación principal.
+                </p>
+                <a href="/admin/grupo/" class="btn btn-outline-secondary">
+                    Ver más <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+        <% } else { %>
+        <div class="alert alert-warning" role="alert">
+            <h4 class="alert-heading"><i class="bi bi-exclamation-triangle"></i>
+                Tabla no disponible!</h4>
+            <p>
+                Necesitas Rellenar la tabla Ciclos Escolares para que
+                puedas crear los grupos.
+            </p>
+            <hr>
+            <p class="mb-0">
+                Rellena las tablas faltantes.
+            </p>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        <% } %>
+    </main>
+    <%- include('../partials/footer') %>
+</body>
+
+</html>

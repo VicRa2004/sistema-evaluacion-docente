@@ -1,0 +1,48 @@
+<nav class="navbar navbar-expand-lg bg-info">
+    <div class="container-fluid">
+        <!-- Logo y nombre de la app -->
+        <a class="navbar-brand text-white fw-bold" href="/profesor">
+            <i class="bi bi-mortarboard-fill"></i> App Evaluacion
+        </a>
+
+        <!-- Botón de colapsado en dispositivos móviles -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Enlaces de navegación y menú desplegable de Cuenta -->
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link text-white" href="/profesor/resultados">
+                    <i class="bi bi-clipboard"></i> Resultados
+                </a>
+
+                <!-- Menú desplegable de Cuenta -->
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-person-circle"></i> Cuenta
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end shadow-lg" aria-labelledby="navbarDropdown">
+                        <li>
+                            <a class="dropdown-item" href="/profesor/perfil"><i class="bi bi-person"></i> Perfil</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/profesor/grupos"><i class="bi bi-clipboard-check"></i>
+                                Grupos</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider" />
+                        </li>
+                        <li>
+                            <a class="dropdown-item text-danger" href="/profesor/logout"><i
+                                    class="bi bi-box-arrow-right"></i> Cerrar
+                                sesión</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

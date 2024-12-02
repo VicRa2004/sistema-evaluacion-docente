@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title><%= title %></title>
+        <%- include('../../../partials/head') %>
+    </head>
+    <body class="bg-light">
+        <%- include('../../../partials/nav_admin') %>
+
+        <main class="container p-5">
+            <div class="row justify-content-center">
+                <div
+                    class="col-lg-6 col-md-8 col-12"
+                    style="max-width: 600px"
+                >
+                    <div class="card border-0 shadow-lg rounded-4">
+                        <div class="card-body p-5">
+                            <h2 class="text-center text-secondary mb-4">
+                                Crear Ciclo Escolar
+                            </h2>
+
+                            <!-- Mensaje de error -->
+                            <% if (error) { %>
+                            <div
+                                class="alert alert-danger alert-dismissible fade show mb-4"
+                                role="alert"
+                            >
+                                <strong>Error!</strong> <%= error.message %>
+                                <button
+                                    type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="alert"
+                                    aria-label="Close"
+                                ></button>
+                            </div>
+                            <% } %>
+
+                            <!-- Formulario -->
+                            <form method="post" action="/admin/ciclo/create" class="needs-validation" novalidate>
+                                
+                                <!-- Nombre del Ciclo -->
+                                <div class="mb-4">
+                                    <label for="ciclo_nombre" class="form-label">Nombre del Ciclo</label>
+                                    <input
+                                        name="ciclo_nombre"
+                                        id="ciclo_nombre"
+                                        type="text"
+                                        class="form-control border-secondary shadow-sm"
+                                        placeholder="Ej. Ciclo 2024-1"
+                                        required
+                                    />
+                                    <div class="invalid-feedback">
+                                        Por favor, ingresa el nombre del ciclo.
+                                    </div>
+                                </div>
+
+                                <!-- Fecha de Inicio -->
+                                <div class="mb-4">
+                                    <label for="ciclo_inicio" class="form-label">Fecha de Inicio</label>
+                                    <input
+                                        name="ciclo_inicio"
+                                        id="ciclo_inicio"
+                                        type="date"
+                                        class="form-control border-secondary shadow-sm"
+                                        required
+                                    />
+                                    <div class="invalid-feedback">
+                                        Por favor, selecciona la fecha de inicio.
+                                    </div>
+                                </div>
+
+                                <!-- Fecha de Finalización -->
+                                <div class="mb-4">
+                                    <label for="ciclo_final" class="form-label">Fecha de Finalización</label>
+                                    <input
+                                        name="ciclo_final"
+                                        id="ciclo_final"
+                                        type="date"
+                                        class="form-control border-secondary shadow-sm"
+                                        required
+                                    />
+                                    <div class="invalid-feedback">
+                                        Por favor, selecciona la fecha de finalización.
+                                    </div>
+                                </div>
+
+                                <!-- Botón de Envío -->
+                                <div class="d-grid">
+                                    <button
+                                        type="submit"
+                                        class="btn btn-secondary shadow-sm"
+                                    >
+                                        Agregar Ciclo
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <%- include('../../../partials/footer') %>
+
+        <script>
+            // Habilitar validación de Bootstrap
+            (() => {
+                'use strict';
+                const forms = document.querySelectorAll('.needs-validation');
+                Array.from(forms).forEach((form) => {
+                    form.addEventListener(
+                        'submit',
+                        (event) => {
+                            if (!form.checkValidity()) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                            }
+                            form.classList.add('was-validated');
+                        },
+                        false
+                    );
+                });
+            })();
+        </script>
+    </body>
+</html>

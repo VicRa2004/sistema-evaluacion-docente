@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Agregar Profesor al Grupo</title>
+        <%- include('../../partials/head') %>
+    </head>
+    <body>
+        <%- include('../../partials/nav_admin') %>
+
+        <main class="container py-5">
+            <h1 class="text-center mb-4">Agregar Profesor al Grupo</h1>
+
+            <% if (error) { %>
+            <div
+                class="alert alert-danger alert-dismissible fade show mb-4"
+                role="alert"
+            >
+                <strong>Error!</strong> <%= error.message %>
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"
+                ></button>
+            </div>
+            <% } %>
+
+            <!-- Lista de Profesores -->
+            <section>
+                <h2 class="h4 text-muted">Profesores</h2>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead class="table-light">
+                            <tr class="text-center">
+                                <th>#</th>
+                                <th>Clave</th>
+                                <th>Nombre</th>
+                                <th>Apellidos</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% profesores.forEach((profesor, index) => { %>
+                            <tr class="text-center">
+                                <td><%= index + 1 %></td>
+                                <td><%= profesor.profesor_clave %></td>
+                                <td><%= profesor.profesor_nombres %></td>
+                                <td>
+                                    <%= profesor.profesor_apellido_paterno %>
+                                    <%= profesor.profesor_apellido_materno %>
+                                </td>
+                                <td>
+                                    <% if (profesor.existsGroup) { %>
+                                    <button class="btn btn-secondary" disabled>
+                                        Ya asignado
+                                    </button>
+                                    <% } else { %>
+                                    <a
+                                        class="btn btn-outline-success"
+                                        href="/admin/set_grupos/add_profesor/?id_usuario=<%= profesor.profesor_id %>&id_grupo=<%= grupo_id %>"
+                                    >
+                                        Asignar
+                                    </a>
+                                    <% } %>
+                                </td>
+                            </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+
+        <%- include('../../partials/footer') %>
+    </body>
+</html>

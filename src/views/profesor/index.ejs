@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+        <%= title %>
+    </title>
+    <%- include('../partials/head') %>
+</head>
+
+<body>
+    <%- include('../partials/nav_profesor') %>
+
+        <main class="container p-5">
+            <h1 class="mb-4 text-info">Sistema Escolar</h1>
+
+            <!-- Card for Academia -->
+            <div class="card border-0 shadow-sm rounded-4 mb-4">
+                <div class="card-header bg-info text-white fw-bold">
+                    <i class="bi bi-back"></i> Apartado - Grupos
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title text-info">Mis Grupos</h5>
+                    <p class="card-text text-muted">
+                        Grupo es una congregación de estudiantes que reciben
+                        enseñanza en una misma aula; pueden pertenecer al mismo
+                        o distinto grado y son diferenciables a otros que cursan
+                        el mismo grado.
+                    </p>
+                    <a href="profesor/grupos/" class="btn btn-outline-info">
+                        Ver todos <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card for Evaluaciones -->
+            <div class="card border-0 shadow-sm rounded-4 mb-4">
+                <div class="card-header bg-info text-white fw-bold">
+                    <i class="bi bi-back"></i> Apartado - Evaluaciones
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title text-info">
+                        Resultados
+                    </h5>
+                    <p class="card-text text-muted">
+                        En general, la evaluación escolar implica que las
+                        escuelas recolecten una serie de pruebas cuantitativas y
+                        cualitativas. Es importante que la evidencia sea
+                        obtenida y administrada de manera apropiada, para que el
+                        enfoque esté en desarrollar una cultura de aprendizaje,
+                        crecimiento y mejora, y no solo en el desempeño.
+                    </p>
+                    <a href="/profesor/resultados/" class="btn btn-outline-info">
+                        Ver todos <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </main>
+        <%- include('../partials/footer') %>
+</body>
+
+</html>

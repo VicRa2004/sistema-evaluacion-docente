@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mis Evaluaciones</title>
+    <%- include('../../partials/head') %>
+</head>
+
+<body>
+    <%- include('../../partials/nav_estudiante') %>
+
+        <main class="container my-5">
+            <h1 class="text-center mb-4">Mis Evaluaciones Pendientes</h1>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                <% evaluaciones.forEach(evaluacion=> { %>
+                    <div class="col">
+                        <div class="card shadow-sm h-100">
+                            <div class="card-header bg-primary text-white">
+                                <h5 class="card-title mb-0">
+                                    Evaluación: <%= evaluacion.evaluacion_descripcion %>
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <p class="mb-2">
+                                    <strong>ID Evaluación:</strong>
+                                    <%= evaluacion.evaluacion_id %>
+                                </p>
+                                <p class="mb-2">
+                                    <strong>Profesor ID:</strong>
+                                    <%= evaluacion.evaluacion_usuario_id %>
+                                </p>
+                                <p class="mb-2">
+                                    <strong>Grupo:</strong>
+                                    <%= evaluacion.grupo_nombre %>
+                                </p>
+                                <p class="mb-2">
+                                    <strong>Contestada:</strong>
+                                    <span
+                                        class="badge <%= evaluacion.ev_pndt_contestada === 'NO' ? 'bg-danger' : 'bg-success' %>">
+                                        <%= evaluacion.ev_pndt_contestada==='NO' ? 'Pendiente' : 'Contestada' %>
+                                    </span>
+                                </p>
+                                <p class="mb-2">
+                                    <strong>Evaluacion Terminada:</strong>
+                                    <span
+                                        class="badge <%= evaluacion.evaluacion_terminada === 'SI' ? 'bg-danger' : 'bg-success' %>">
+                                        <%= evaluacion.evaluacion_terminada%>
+                                    </span>
+                                </p>
+                            </div>
+                            <div class="card-footer text-end">
+                                <% if (evaluacion.ev_pndt_contestada==='NO' && evaluacion.evaluacion_terminada==="NO" )
+                                    { %>
+                                    <a href="/estudiante/evaluaciones/<%= evaluacion.evaluacion_id %>/<%= evaluacion.ev_pndt_id %>"
+                                        class="btn btn-primary">
+                                        Realizar Evaluación
+                                    </a>
+                                    <% } else { %>
+                                        <button class="btn btn-secondary btn-sm" disabled>
+                                            <%=evaluacion.ev_pndt_contestada==='SI' ? 'Evaluacion Terminada'
+                                                : 'Evaluacion concluida' %>
+                                        </button>
+                                        <% } %>
+                            </div>
+                        </div>
+                    </div>
+                    <% }); %>
+            </div>
+        </main>
+
+        <%- include('../../partials/footer') %>
+</body>
+
+</html>

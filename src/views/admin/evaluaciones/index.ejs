@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+        <%= title %>
+    </title>
+    <%- include('../../partials/head') %>
+</head>
+
+<body>
+    <%- include('../../partials/nav_admin') %>
+
+        <main class="container py-5">
+            <h1 class="text-center mb-4">
+                <%= title %>
+            </h1>
+
+            <!-- Botón estilizado para Ver Preguntas -->
+            <div class="mb-5 text-center">
+                <a href="/admin/evaluaciones/preguntas" class="btn btn-primary btn-lg shadow-sm px-4 py-2 mx-3"
+                    style="border-radius: 50px; font-weight: bold">
+                    Ver Preguntas
+                </a>
+
+                <a href="/admin/evaluaciones/create" class="btn btn-primary btn-lg shadow-sm px-4 py-2"
+                    style="border-radius: 50px; font-weight: bold">
+                    Crear Evaluaciones
+                </a>
+
+                <a href="/admin/evaluaciones/terminar" class="btn btn-primary btn-lg shadow-sm px-4 py-2"
+                    style="border-radius: 50px; font-weight: bold">
+                    Terminar Evaluaciones
+                </a>
+            </div>
+
+            <div class="mb-4">
+                <h5 class="text-secondary">Filtrar Evaluaciones</h5>
+                <form method="post" action="/admin/evaluaciones" class="row gy-2 gx-3 align-items-center">
+                    <input type="hidden" value="<%= page %>">
+
+                    <!-- Campo de búsqueda -->
+                    <div class="col-12 col-md-4">
+                        <label for="grupo_busqueda" class="visually-hidden">Buscar grupo</label>
+                        <input type="text" class="form-control" name="grupo_busqueda" id="grupo_busqueda"
+                            placeholder="Buscar evaluación..." value="<%= busqueda %>">
+                    </div>
+
+                    <!-- Filtro por evaluaciones terminadas -->
+                    <div class="col-12 col-md-4">
+
+                        <div class="btn-group w-100" role="group" aria-label="Estado de evaluación">
+                            <input type="radio" class="btn-check" name="terminada" id="terminada_ninguna" value=""
+                                <%=terminada==='' ? "checked" : "" %>>
+                            <label class="btn btn-outline-secondary" for="terminada_ninguna">Cualquiera</label>
+
+                            <input type="radio" class="btn-check" name="terminada" id="terminada_si" value="SI"
+                                <%=terminada==='SI' ? "checked" : "" %>>
+                            <label class="btn btn-outline-secondary" for="terminada_si">Sí</label>
+
+                            <input type="radio" class="btn-check" name="terminada" id="terminada_no" value="NO"
+                                <%=terminada==='NO' ? "checked" : "" %>>
+                            <label class="btn btn-outline-secondary" for="terminada_no">No</label>
+                        </div>
+                    </div>
+
+                    <!-- Filtro por ciclo escolar -->
+                    <div class="col-12 col-md-3">
+                        <label for="ciclo_id" class="visually-hidden">Ciclo Escolar</label>
+                        <select class="form-select" name="ciclo_id" id="ciclo_id">
+                            <option value="">Todas</option>
+                            <% ciclos.forEach(ciclo=> { %>
+                                <option <%=ciclo.ciclo_id==filtro ? "selected" : "" %> value="<%= ciclo.ciclo_id %>">
+                                        <%= ciclo.ciclo_nombre %>
+                                </option>
+                                <% }) %>
+                        </select>
+                    </div>
+
+                    <!-- Botón de búsqueda -->
+                    <div class="col-12 col-md-1">
+                        <button type="submit" class="btn btn-secondary w-100">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+
+
+            <!-- Tarjetas de Evaluaciones -->
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                <% evaluaciones.forEach(evaluacion=> { %>
+                    <div class="col">
+                        <div class="card shadow-sm h-100">
+                            <div class="card-body">
+                                <h5 class="card-title text-secondary">
+                                    <%= evaluacion.evaluacion_descripcion %>
+                                </h5>
+                                <h6 class="card-subtitle mb-2 text-muted">
+                                    Grupo: <%= evaluacion.grupo_nombre %>
+                                </h6>
+                                <p class="card-text">
+                                <div class="">
+                                    <strong>Descripción del Grupo:</strong>
+                                    <%= evaluacion.grupo_descripcion %><br />
+                                </div>
+                                <div class="">
+                                    <strong>Profesor:</strong>
+                                    <%= evaluacion.usuario_nombres %>
+                                        <%= evaluacion.usuario_apellido_paterno %>
+                                            <%= evaluacion.usuario_apellido_materno %><br />
+                                </div>
+
+                                <div class="">
+                                    <strong>Evaluación ID:</strong>
+                                    <%= evaluacion.evaluacion_id %><br />
+                                </div>
+
+                                <div>
+                                    <strong>Evaluacion terminada: </strong>
+                                    <span class="badge 
+                                        <%= evaluacion.evaluacion_terminada === 'SI' ? " bg-success" : "bg-danger" %>">
+                                        <%= evaluacion.evaluacion_terminada %>
+                                    </span>
+                                </div>
+                                </p>
+                            </div>
+                            <div class="card-footer text-center">
+                                <a href="/admin/evaluaciones/info/<%= evaluacion.evaluacion_id %>"
+                                    class="btn btn-outline-secondary btn-sm" style="border-radius: 20px">
+                                    Ver detalles
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <% }); %>
+            </div>
+
+            <nav aria-label="Paginación">
+                <ul class="pagination justify-content-center mt-4">
+                    <% if (page> 1) { %>
+                        <li class="page-item">
+                            <a class="page-link"
+                                href="/admin/evaluaciones?busqueda=<%= busqueda %>&filtro=<%= filtro %>&page=<%= page + 1 %>&terminada=<%= terminada %>">Anterior</a>
+                        </li>
+                        <% } %>
+                            <li class="page-item active">
+                                <span class="page-link">
+                                    <%= page %>
+                                </span>
+                            </li>
+                            <% if (evaluaciones.length===9) { %>
+                                <li class="page-item">
+                                    <a class="page-link"
+                                        href="/admin/evaluaciones?busqueda=<%= busqueda %>&filtro=<%= filtro %>&page=<%= page + 1 %>&terminada=<%= terminada %>">Siguiente</a>
+                                </li>
+                                <% } %>
+                </ul>
+            </nav>
+        </main>
+
+        <%- include('../../partials/footer') %>
+</body>
+
+</html>

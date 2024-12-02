@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+        <%= title %>
+    </title>
+    <%- include('../partials/head') %>
+</head>
+
+<body>
+    <%- include('../partials/nav_profesor') %>
+
+        <main class="container my-5">
+            <h1 class="text-center mb-4">Mis Grupos</h1>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                <% grupos.forEach(grupo=> { %>
+                    <div class="col">
+                        <div class="border rounded shadow-sm h-100">
+                            <div class="bg-info text-white p-3">
+                                <h5 class="mb-0">
+                                    Nombre:
+                                    <span class="fw-normal">
+                                        <%= grupo.grupo_nombre %>
+                                    </span>
+                                </h5>
+                            </div>
+                            <div class="p-3">
+                                <p class="mb-2">
+                                    <strong>Descripción:</strong>
+                                    <%= grupo.grupo_descripcion %>
+                                </p>
+                                <p class="mb-3">
+                                    <strong>Ciclo Escolar:</strong>
+                                    <%= grupo.ciclo_escolar_nombre %>
+                                </p>
+                                <a class="btn btn-info" href="/profesor/grupos/<%= grupo.grupo_id %>">
+                                    Ver estudiantes
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <% }) %>
+            </div>
+        </main>
+
+        <%- include('../partials/footer') %>
+</body>
+
+</html>

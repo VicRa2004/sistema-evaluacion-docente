@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+        <%= title %>
+    </title>
+    <%- include('../partials/head') %>
+</head>
+
+<body>
+    <%- include('../partials/nav_profesor') %>
+
+        <main class="container py-5">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="text-center mb-4">
+                        <%= title %>
+                    </h2>
+                </div>
+
+                <div class="col-12">
+                    <div class="row">
+                        <% resultados.forEach((resultado)=> { %>
+                            <div class="col-md-6 col-lg-4 mb-4">
+                                <div class="card border-info">
+                                    <div class="card-header bg-info text-white">
+                                        <h5 class="card-title mb-0">
+                                            <%= resultado.criterio_nombre %>
+                                        </h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <h6 class="card-subtitle mb-2 text-muted">Puntaje Promedio General</h6>
+                                        <p class="card-text fs-4">
+                                            <%= resultado.puntaje_promedio_general %>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <% }) %>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <%- include('../partials/footer') %>
+</body>
+
+</html>

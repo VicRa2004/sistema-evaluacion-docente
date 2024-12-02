@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title><%= title %></title>
+        <%- include('../../../partials/head') %>
+    </head>
+    <body class="bg-light">
+        <%- include('../../../partials/nav_admin') %>
+
+        <main class="container p-5">
+            <div class="d-flex justify-content-center">
+                <div
+                    class="card border-0 shadow-lg rounded-4"
+                    style="max-width: 600px"
+                >
+                    <div class="card-body p-5">
+                        <h2 class="text-center text-secondary mb-4">
+                            Crear Academia
+                        </h2>
+
+                        <!-- Error Alert -->
+                        <% if (error) { %>
+                        <div
+                            class="alert alert-danger alert-dismissible fade show mb-4"
+                            role="alert"
+                        >
+                            <strong>Error!</strong> <%= error.message %>
+                            <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="alert"
+                                aria-label="Close"
+                            ></button>
+                        </div>
+                        <% } %>
+
+                        <!-- Formulario -->
+                        <form method="post" action="/admin/academia/create">
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <label for="aca_nombre" class="form-label"
+                                        >Nombre</label
+                                    >
+                                    <input
+                                        name="aca_nombre"
+                                        id="aca_nombre"
+                                        type="text"
+                                        class="form-control border-secondary shadow-sm"
+                                        placeholder="Ingrese el nombre"
+                                        required
+                                    />
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="aca_fecha" class="form-label"
+                                        >Fecha de Creación</label
+                                    >
+                                    <input
+                                        name="aca_fecha"
+                                        id="aca_fecha"
+                                        type="date"
+                                        class="form-control border-secondary shadow-sm"
+                                        required
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="aca_descripcion" class="form-label"
+                                    >Descripción</label
+                                >
+                                <textarea
+                                    name="aca_descripcion"
+                                    id="aca_descripcion"
+                                    rows="3"
+                                    class="form-control border-secondary shadow-sm"
+                                    placeholder="Ingrese una descripción"
+                                    required
+                                ></textarea>
+                            </div>
+
+                            <div class="d-grid">
+                                <button
+                                    type="submit"
+                                    class="btn btn-secondary shadow-sm"
+                                >
+                                    Registrar Academia
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <%- include('../../../partials/footer') %>
+    </body>
+</html>

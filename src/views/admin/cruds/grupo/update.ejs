@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title><%= title %></title>
+        <%- include('../../../partials/head') %>
+    </head>
+    <body class="bg-light">
+        <%- include('../../../partials/nav_admin') %>
+
+        <main class="container p-5">
+            <div class="d-flex justify-content-center">
+                <div
+                    class="card border-0 shadow-lg rounded-4"
+                    style="max-width: 600px"
+                >
+                    <div class="card-body p-5">
+                        <h2 class="text-center text-secondary mb-4">
+                            <%= title %>
+                        </h2>
+
+                        <% if (error) { %>
+                        <div
+                            class="alert alert-danger alert-dismissible fade show mb-4"
+                            role="alert"
+                        >
+                            <strong>Error!</strong> <%= error.message %>
+                            <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="alert"
+                                aria-label="Close"
+                            ></button>
+                        </div>
+                        <% } %>
+
+                        <form
+                            method="post"
+                            action="/admin/grupo/update/<%= grupo.grupo_id %>"
+                        >
+                            <div class="mb-4">
+                                <label for="grupo_nombre" class="form-label"
+                                    >Nombre</label
+                                >
+                                <input
+                                    name="grupo_nombre"
+                                    id="grupo_nombre"
+                                    type="text"
+                                    class="form-control border-secondary shadow-sm"
+                                    value="<%= grupo.grupo_nombre %>"
+                                    required
+                                />
+                            </div>
+
+                            <div class="mb-4">
+                                <label
+                                    for="grupo_descripcion"
+                                    class="form-label"
+                                    >Descripción</label
+                                >
+                                <input
+                                    name="grupo_descripcion"
+                                    id="grupo_descripcion"
+                                    type="text"
+                                    class="form-control border-secondary shadow-sm"
+                                    value="<%= grupo.grupo_descripcion %>"
+                                    required
+                                />
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="grupo_ciclo_id" class="form-label"
+                                    >Ciclo ID</label
+                                >
+                                <input
+                                    name="grupo_ciclo_id"
+                                    id="grupo_ciclo_id"
+                                    type="number"
+                                    class="form-control border-secondary shadow-sm"
+                                    value="<%= grupo.grupo_ciclo_id %>"
+                                    required
+                                />
+                            </div>
+
+                            <div class="mb-4 form-check">
+                                <input type="checkbox" class="form-check-input
+                                border-secondary shadow-sm" id="grupo_activo"
+                                name="grupo_activo" <%= grupo.grupo_activo ==
+                                "SI" ? "checked" : "" %> />
+                                <label
+                                    for="grupo_activo"
+                                    class="form-check-label"
+                                    >Activo</label
+                                >
+                            </div>
+
+                            <input
+                                type="hidden"
+                                name="grupo_id"
+                                value="<%= grupo.grupo_id %>"
+                            />
+
+                            <div class="d-grid">
+                                <button
+                                    type="submit"
+                                    class="btn btn-secondary shadow-sm"
+                                >
+                                    Actualizar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <%- include('../../../partials/footer') %>
+    </body>
+</html>

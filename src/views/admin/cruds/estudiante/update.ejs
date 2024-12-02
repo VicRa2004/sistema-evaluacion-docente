@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Registro de Estudiante</title>
+        <%- include('../../../partials/head') %>
+    </head>
+    <body class="bg-light">
+        <%- include('../../../partials/nav_admin') %>
+        <div class="container p-5 d-flex justify-content-center">
+            <div
+                class="card border-0 shadow-lg rounded-4"
+                style="max-width: 550px"
+            >
+                <div class="card-body p-5">
+                    <h2 class="text-center text-primary mb-4">
+                        <i class="bi bi-person-plus"></i> Registro de Estudiante
+                    </h2>
+
+                    <% if (error) { %>
+                    <div
+                        class="alert alert-danger alert-dismissible fade show mb-4"
+                        role="alert"
+                    >
+                        <strong>Error!</strong> <%= error.message %>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert"
+                            aria-label="Close"
+                        ></button>
+                    </div>
+                    <% } %>
+
+                    <form method="POST" action="/admin/estudiante/update/<%= estudiante.estudiante_id %>">
+                        <div class="mb-3">
+                            <label for="est_nombres" class="form-label"
+                                >Nombres</label
+                            >
+                            <input
+                                type="text"
+                                class="form-control border-primary shadow-sm"
+                                id="est_nombres"
+                                name="est_nombres"
+                                value="<%= estudiante?.estudiante_nombres || '' %>"
+                                required
+                            />
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label
+                                    for="est_apellido_paterno"
+                                    class="form-label"
+                                    >Apellido Paterno</label
+                                >
+                                <input
+                                    type="text"
+                                    class="form-control border-primary shadow-sm"
+                                    id="est_apellido_paterno"
+                                    name="est_apellido_paterno"
+                                    value="<%= estudiante?.estudiante_apellido_paterno || '' %>"
+                                    required
+                                />
+                            </div>
+                            <div class="col">
+                                <label
+                                    for="est_apellido_materno"
+                                    class="form-label"
+                                    >Apellido Materno</label
+                                >
+                                <input
+                                    type="text"
+                                    class="form-control border-primary shadow-sm"
+                                    id="est_apellido_materno"
+                                    name="est_apellido_materno"
+                                    value="<%= estudiante?.estudiante_apellido_materno || '' %>"
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="est_clave" class="form-label"
+                                >Clave de Estudiante</label
+                            >
+                            <input
+                                type="text"
+                                class="form-control border-primary shadow-sm"
+                                id="est_clave"
+                                name="est_clave"
+                                value="<%= estudiante?.estudiante_clave || '' %>"
+                                required
+                            />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="est_password" class="form-label"
+                                >Contraseña</label
+                            >
+                            <input
+                                type="password"
+                                class="form-control border-primary shadow-sm"
+                                id="est_password"
+                                name="est_password"
+                                value="<%= estudiante?.estudiante_password || '' %>"
+                                required
+                            />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="est_fecha_nacimiento" class="form-label"
+                                >Fecha de Nacimiento</label
+                            >
+                            <input
+                                type="date"
+                                class="form-control border-primary shadow-sm"
+                                id="est_fecha_nacimiento"
+                                name="est_fecha_nacimiento"
+                                value="<%= estudiante?.estudiante_fecha_nacimiento || '' %>"
+                                required
+                            />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="est_genero" class="form-label"
+                                >Género</label
+                            >
+                            <select
+                                class="form-select border-primary shadow-sm"
+                                id="est_genero"
+                                name="est_genero"
+                                required
+                            >
+                                <option value="">Selecciona una opción</option>
+                                <option value="M" <%= estudiante?.estudiante_genero === 'M' ? 'selected' : '' %>>Masculino</option>
+                                <option value="F" <%= estudiante?.estudiante_genero === 'F' ? 'selected' : '' %>>Femenino</option>
+                                <option value="O" <%= estudiante?.estudiante_genero === 'O' ? 'selected' : '' %>>Otro</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="est_carrera_id" class="form-label"
+                                >Carrera</label
+                            >
+                            <select
+                                class="form-select border-primary shadow-sm"
+                                id="est_carrera_id"
+                                name="est_carrera_id"
+                                required
+                            >
+                                <option value="" selected disabled>
+                                    Selecciona una carrera
+                                </option> 
+                                <% carreras.forEach(carrera => { %>
+                                <option 
+                                    value="<%= carrera.carrera_id %>" 
+                                    <%= estudiante?.estudiante_carrera_id === carrera.carrera_id ? 'selected' : '' %>>
+                                    <%= carrera.carrera_nombre %>
+                                </option>
+                                <% }) %>
+                            </select>
+                        </div>
+
+                        <div class="mb-4 form-check">
+                            <input class="form-check-input" type="checkbox" name="est_activo" id="est_activo" <%= estudiante.estudiante_activo ? "Checked" : "" %>>
+                            <label class="form-check-label" for="est_activo">
+                              Activo
+                            </label>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="est_fecha_alta" class="form-label"
+                                >Fecha Alta</label
+                            >
+                            <input
+                                type="date"
+                                class="form-control border-primary shadow-sm"
+                                id="est_fecha_alta"
+                                name="est_fecha_alta"
+                                value="<%= estudiante?.estudiante_fecha_alta || '' %>"
+                                required
+                            />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="est_fecha_baja" class="form-label"
+                                >Fecha baja</label
+                            >
+                            <input
+                                type="date"
+                                class="form-control border-primary shadow-sm"
+                                id="est_fecha_baja"
+                                name="est_fecha_baja"
+                                value="<%= estudiante?.estudiante_fecha_baja || '' %>"
+                            />
+                        </div>
+
+                        <div class="d-grid">
+                            <button
+                                type="submit"
+                                class="btn btn-primary shadow-sm"
+                            >
+                                <i class="bi bi-check-circle"></i> Registrarse
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <%- include('../../../partials/footer') %>
+    </body>
+</html>

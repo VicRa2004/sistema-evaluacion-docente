@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title><%= title %></title>
+        <%- include('../../../partials/head') %>
+    </head>
+    <body class="bg-light">
+        <%- include('../../../partials/nav_admin') %>
+
+        <main class="container p-5">
+            <div class="d-flex justify-content-center">
+                <div
+                    class="card border-0 shadow-lg rounded-4"
+                    style="max-width: 600px"
+                >
+                    <div class="card-body p-5">
+                        <h2 class="text-center text-secondary mb-4">
+                            <%= title %>
+                        </h2>
+
+                        <% if (error) { %>
+                        <div
+                            class="alert alert-danger alert-dismissible fade show mb-4"
+                            role="alert"
+                        >
+                            <strong>Error!</strong> <%= error.message %>
+                            <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="alert"
+                                aria-label="Close"
+                            ></button>
+                        </div>
+                        <% } %>
+
+                        <form
+                            method="post"
+                            action="/admin/evaluaciones/preguntas/create"
+                        >
+                            <div class="mb-4">
+                                <label for="criterio_nombre" class="form-label">
+                                    Nombre del Criterio
+                                </label>
+                                <input
+                                    name="criterio_nombre"
+                                    id="criterio_nombre"
+                                    type="text"
+                                    class="form-control border-secondary shadow-sm"
+                                    required
+                                />
+                            </div>
+
+                            <div class="mb-4">
+                                <label
+                                    for="criterio_descripcion"
+                                    class="form-label"
+                                >
+                                    Descripción del Criterio
+                                </label>
+                                <input
+                                    name="criterio_descripcion"
+                                    id="criterio_descripcion"
+                                    type="text"
+                                    class="form-control border-secondary shadow-sm"
+                                    required
+                                />
+                            </div>
+
+                            <div class="mb-4">
+                                <h5>Preguntas (por defecto 5 preguntas)</h5>
+                                <div class="mb-3">
+                                    <label for="pregunta_1" class="form-label">
+                                        Pregunta 1
+                                    </label>
+                                    <input
+                                        name="pregunta_1"
+                                        id="pregunta_1"
+                                        type="text"
+                                        class="form-control border-secondary shadow-sm"
+                                    />
+                                </div>
+                                <div class="mb-3">
+                                    <label for="pregunta_2" class="form-label">
+                                        Pregunta 2
+                                    </label>
+                                    <input
+                                        name="pregunta_2"
+                                        id="pregunta_2"
+                                        type="text"
+                                        class="form-control border-secondary shadow-sm"
+                                    />
+                                </div>
+                                <div class="mb-3">
+                                    <label for="pregunta_3" class="form-label">
+                                        Pregunta 3
+                                    </label>
+                                    <input
+                                        name="pregunta_3"
+                                        id="pregunta_3"
+                                        type="text"
+                                        class="form-control border-secondary shadow-sm"
+                                    />
+                                </div>
+                                <div class="mb-3">
+                                    <label for="pregunta_4" class="form-label">
+                                        Pregunta 4
+                                    </label>
+                                    <input
+                                        name="pregunta_4"
+                                        id="pregunta_4"
+                                        type="text"
+                                        class="form-control border-secondary shadow-sm"
+                                    />
+                                </div>
+                                <div class="mb-3">
+                                    <label for="pregunta_5" class="form-label">
+                                        Pregunta 5
+                                    </label>
+                                    <input
+                                        name="pregunta_5"
+                                        id="pregunta_5"
+                                        type="text"
+                                        class="form-control border-secondary shadow-sm"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="d-grid">
+                                <button
+                                    type="submit"
+                                    class="btn btn-secondary shadow-sm"
+                                >
+                                    Agregar Criterio y Preguntas
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <%- include('../../../partials/footer') %>
+    </body>
+</html>
